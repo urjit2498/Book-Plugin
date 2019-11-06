@@ -1,0 +1,17 @@
+{
+    "name": "openpgsvc/book-plugin",
+    "description": "Startup plugin development for RTcamp Placement Preparation",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Urjit",
+            "email": "urjit64@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": { "Inc\\" : "./inc/"}
+    }
+}
