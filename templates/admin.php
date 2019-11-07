@@ -11,10 +11,10 @@
         <div id="tab-1" class="tab-pane active">
             <form method="post" action="options.php">
                 <?php
-            		settings_fields('book_options_group');
-            		do_settings_sections('book_plugin');
-            		submit_button();
-        		?>
+                        settings_fields('book_options_group');
+                        do_settings_sections('book_plugin');
+                        submit_button();
+                    ?>
             </form>
         </div>
 

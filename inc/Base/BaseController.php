@@ -6,6 +6,11 @@ namespace Inc\Base;
 
 class BaseController
 {
+    /**
+     * defined Paths and URL's
+     *
+     * @var public
+     */
     public $plugin_path;
 
     public $plugin_url;
