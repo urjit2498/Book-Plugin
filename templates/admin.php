@@ -11,7 +11,7 @@
         <div id="tab-1" class="tab-pane active">
             <form method="post" action="options.php">
                 <?php
-                        settings_fields('book_options_group');
+                        settings_fields('book_plugin_settings');
                         do_settings_sections('book_plugin');
                         submit_button();
                     ?>
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
 window.addEventListener("load", function() {
     //store tabs variables
     var tabs = document.querySelectorAll("ul.nav-tabs > li");
@@ -52,4 +52,4 @@ window.addEventListener("load", function() {
 
     }
 });
-</script>
+</script> -->
