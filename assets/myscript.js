@@ -1,24 +1,25 @@
-//Vanila JavaScript
 window.addEventListener("load", function() {
-    //store tabs variables
-    var tabs = document.querySelectorAll("ul.nav-tabs > li");
 
-    for (i = 0; i < tabs.length; i++) {
-        tabs[i].addEventListener("click", switchTab);
-    }
+	// store tabs variables
+	var tabs = document.querySelectorAll("ul.nav-tabs > li");
 
-    function switchTab(event) {
-        event.preventDefault();
+	for (i = 0; i < tabs.length; i++) {
+		tabs[i].addEventListener("click", switchTab);
+	}
 
-        document.querySelector("ul.nav-tabs li.active").classList.remove("active");
-        document.querySelector(".tab-pane.active").classList.remove("active");
+	function switchTab(event) {
+		event.preventDefault();
 
-        var clickedTab = event.currentTarget;
-        var anchor = event.target;
-        var activePaneID = anchor.getAttribute("href");
+		document.querySelector("ul.nav-tabs li.active").classList.remove("active");
+		document.querySelector(".tab-pane.active").classList.remove("active");
 
-        clickedTab.classList.add("active");
-        document.querySelector(activePaneID).classList.add("active");
+		var clickedTab = event.currentTarget;
+		var anchor = event.target;
+		var activePaneID = anchor.getAttribute("href");
 
-    }
+		clickedTab.classList.add("active");
+		document.querySelector(activePaneID).classList.add("active");
+
+	}
+
 });
