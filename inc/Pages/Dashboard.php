@@ -13,7 +13,7 @@ use Inc\Base\BaseController;
 /**
  *
  */
-class Admin extends BaseController
+class Dashboard extends BaseController
 {
     public $settings;
 
@@ -22,7 +22,7 @@ class Admin extends BaseController
 
     public $pages = array();
 
-    public $subpages = array();
+    //public $subpages = array();
 
     public function register()
     {
@@ -32,13 +32,13 @@ class Admin extends BaseController
         $this->callbacks_mngr = new ManagerCallbacks();
 
         $this->setPages();
-        $this->setSubpages();
+        //$this->setSubpages();
 
         $this->setSettings();
 		$this->setSections();
 		$this->setFields();
 
-        $this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubPages($this->subpages)->register();
+        $this->settings->addPages($this->pages)->withSubPage('Dashboard')->register();
     }
 
     public function setPages()
@@ -56,35 +56,35 @@ class Admin extends BaseController
         );
     }
 
-    public function setSubpages()
-    {
-        $this->subpages = array(
-            array(
-                'parent_slug' => 'book_plugin',
-                'page_title' => 'Custom Post Type',
-                'menu_title' => 'CPT',
-                'capability' => 'manage_options',
-                'menu_slug' => 'book_cpt',
-                'callback' => function () {echo '<h1>Custom Post Type Manager</h1>';},
-            ),
-            array(
-                'parent_slug' => 'book_plugin',
-                'page_title' => 'Custom Texonomy',
-                'menu_title' => 'Texonomies',
-                'capability' => 'manage_options',
-                'menu_slug' => 'book_Texonomies',
-                'callback' => function () {echo '<h1>Texonomy Manager</h1>';},
-            ),
-            array(
-                'parent_slug' => 'book_plugin',
-                'page_title' => 'Custom Widget',
-                'menu_title' => 'Widgets',
-                'capability' => 'manage_options',
-                'menu_slug' => 'book_widget',
-                'callback' => function () {echo '<h1>Widget Manager</h1>';},
-            ),
-        );
-    }
+    // public function setSubpages()
+    // {
+    //     $this->subpages = array(
+    //         array(
+    //             'parent_slug' => 'book_plugin',
+    //             'page_title' => 'Custom Post Type',
+    //             'menu_title' => 'CPT',
+    //             'capability' => 'manage_options',
+    //             'menu_slug' => 'book_cpt',
+    //             'callback' => function () {echo '<h1>Custom Post Type Manager</h1>';},
+    //         ),
+    //         array(
+    //             'parent_slug' => 'book_plugin',
+    //             'page_title' => 'Custom Texonomy',
+    //             'menu_title' => 'Texonomies',
+    //             'capability' => 'manage_options',
+    //             'menu_slug' => 'book_Texonomies',
+    //             'callback' => function () {echo '<h1>Texonomy Manager</h1>';},
+    //         ),
+    //         array(
+    //             'parent_slug' => 'book_plugin',
+    //             'page_title' => 'Custom Widget',
+    //             'menu_title' => 'Widgets',
+    //             'capability' => 'manage_options',
+    //             'menu_slug' => 'book_widget',
+    //             'callback' => function () {echo '<h1>Widget Manager</h1>';},
+    //         ),
+    //     );
+    // }
 
     public function setSettings()
     {
