@@ -17,9 +17,17 @@ final class Init
     {
         return [
             Pages\Dashboard::class,
-            Base\Enqueue::class,
-            Base\SettingsLinks::class,
-            Base\CustomPostTypeController::class
+			Base\Enqueue::class,
+			Base\SettingsLinks::class,
+			Base\CustomPostTypeController::class,
+			Base\CustomTaxonomyController::class,
+			Base\WidgetController::class,
+			Base\GalleryController::class,
+			Base\TestimonialController::class,
+			Base\TemplateController::class,
+			Base\AuthController::class,
+			Base\MembershipController::class,
+			Base\ChatController::class,
             
         ];
     }
@@ -53,95 +61,3 @@ final class Init
         return $service;
     }
 }
-
-// /**
-//  * Use namespaces
-//  */
-// use Inc\Activate;
-// use Inc\Deactivate;
-// use Inc\Admin\AdminPages;
-
-// /**
-//  * Chech the class existance
-//  */
-// if( !class_exists( 'BookPlugin' ) )
-// {
-//     class BookPlugin
-//     {
-//         public $pugin;
-
-//         function __construct(){
-//             $this->plugin = plugin_basename( __FILE__ );
-//         }
-
-//         /**
-//          * Initialize all the action and filters
-//          *
-//          * @return void
-//          */
-//         public function register()
-//         {
-//             add_action('admin_enqueue_scripts', array( $this,'enqueue' ));
-
-//             add_action( 'admin_menu', array( $this, 'add_admin_pages') );
-
-//
-//         }
-
-//         /**
-//          * Setting up custom setting links for admin
-//          *
-//          * @param [type] $links
-//          * @return void
-//          */
-//         public function settings_link( $links )
-//         {
-//             //add custom setting links
-//             $settings_link1 = '<a href="admin.php?page=book_plugin">Settings</a>';
-//             $settings_link2 = '<a href="admin.php?page=book_plugin">Edit</a>';
-//             array_push( $links, $settings_link1, $settings_link2 );
-//             return $links;
-//         }
-
-//         public function add_admin_pages()
-//         {
-//             add_menu_page( 'Book Plugin', 'Book', 'manage_options', 'book_plugin', array($this,'admin_index'), 'dashicons-store', 120 );
-//         }
-
-//         public function admin_index()
-//         {
-//             //Require template
-//             require_once plugin_dir_path( __FILE__ ).'templates/admin.php';
-//         }
-
-//         protected function create_post_type()
-//         {
-//             add_action('init', array( $this, 'custom_post_type' ));
-//         }
-
-//         public function custom_post_type()
-//         {
-//             register_post_type('book', ['public'=>true,'label'=>'Books']);
-//         }
-
-//         public function enqueue()
-//         {
-//             //Enqueue all the scripts
-//             wp_enqueue_style('mypluginstyle', plugins_url('/assets/mystyle.css', __FILE__));
-//             wp_enqueue_script('mypluginscript', plugins_url('/assets/myscript.js', __FILE__));
-//         }
-
-//
-//     }
-
-//     $bookPlugin = new BookPlugin();
-//     $bookPlugin->register();
-
-//     //Activation
-
-//
-
-//     //Deactivation
-//
-
-// }

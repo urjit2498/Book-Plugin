@@ -48,10 +48,6 @@ if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
 }
 
 /**
- * Define CONSTANTS
- */
-
-/**
  * Use namespaces
  */
 use Inc\Base\Activate;

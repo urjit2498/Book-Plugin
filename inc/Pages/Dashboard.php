@@ -5,11 +5,10 @@
 
 namespace Inc\Pages;
 
-use Inc\Api\Callbacks\AdminCallbacks;
-use Inc\Api\Callbacks\ManagerCallbacks;
 use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
-
+use Inc\Api\Callbacks\AdminCallbacks;
+use Inc\Api\Callbacks\ManagerCallbacks;
 /**
  *
  */
@@ -32,7 +31,6 @@ class Dashboard extends BaseController
         $this->callbacks_mngr = new ManagerCallbacks();
 
         $this->setPages();
-        //$this->setSubpages();
 
         $this->setSettings();
 		$this->setSections();
@@ -55,36 +53,6 @@ class Dashboard extends BaseController
             ),
         );
     }
-
-    // public function setSubpages()
-    // {
-    //     $this->subpages = array(
-    //         array(
-    //             'parent_slug' => 'book_plugin',
-    //             'page_title' => 'Custom Post Type',
-    //             'menu_title' => 'CPT',
-    //             'capability' => 'manage_options',
-    //             'menu_slug' => 'book_cpt',
-    //             'callback' => function () {echo '<h1>Custom Post Type Manager</h1>';},
-    //         ),
-    //         array(
-    //             'parent_slug' => 'book_plugin',
-    //             'page_title' => 'Custom Texonomy',
-    //             'menu_title' => 'Texonomies',
-    //             'capability' => 'manage_options',
-    //             'menu_slug' => 'book_Texonomies',
-    //             'callback' => function () {echo '<h1>Texonomy Manager</h1>';},
-    //         ),
-    //         array(
-    //             'parent_slug' => 'book_plugin',
-    //             'page_title' => 'Custom Widget',
-    //             'menu_title' => 'Widgets',
-    //             'capability' => 'manage_options',
-    //             'menu_slug' => 'book_widget',
-    //             'callback' => function () {echo '<h1>Widget Manager</h1>';},
-    //         ),
-    //     );
-    // }
 
     public function setSettings()
     {
