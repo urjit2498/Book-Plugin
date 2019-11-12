@@ -22,12 +22,7 @@ class CustomTaxonomyController extends BaseController
     public function register()
     {
         
-        $option = get_option('book_plugin');
-        $activated = isset( $option['taxonomy_manager'] ) ? $option['taxonomy_manager'] : false;
-
-        if(! $activated){
-            return;
-        }
+        if(! $this->activated('taxonomy_manager')) return;
 
         $this->settings = new SettingsApi();
 

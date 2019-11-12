@@ -19,14 +19,8 @@ class CustomPostTypeController extends BaseController
     public $callbacks;
     public function register()
     {
+        if(! $this->activated('cpt_manager')) return;
         
-        $option = get_option('book_plugin');
-        $activated = isset( $option['cpt_manager'] ) ? $option['cpt_manager'] : false;
-
-        if(! $activated){
-            return;
-        }
-
         $this->callbacks = new AdminCallbacks();
 
         $this->settings = new SettingsApi();

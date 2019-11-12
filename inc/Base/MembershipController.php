@@ -22,12 +22,7 @@ class MembershipController extends BaseController
     public function register()
     {
         
-        $option = get_option('book_plugin');
-        $activated = isset( $option['membership_manager'] ) ? $option['membership_manager'] : false;
-
-        if(! $activated){
-            return;
-        }
+        if(! $this->activated('membership_manager')) return;
 
         $this->settings = new SettingsApi();
 

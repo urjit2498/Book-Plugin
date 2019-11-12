@@ -21,13 +21,7 @@ class AuthController extends BaseController
     
     public function register()
     {
-        
-        $option = get_option('book_plugin');
-        $activated = isset( $option['login_manager'] ) ? $option['login_manager'] : false;
-
-        if(! $activated){
-            return;
-        }
+        if(! $this->activated('login_manager')) return;
 
         $this->settings = new SettingsApi();
 

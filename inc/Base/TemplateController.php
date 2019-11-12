@@ -22,12 +22,7 @@ class TemplateController extends BaseController
     public function register()
     {
         
-        $option = get_option('book_plugin');
-        $activated = isset( $option['template_manager'] ) ? $option['template_manager'] : false;
-
-        if(! $activated){
-            return;
-        }
+        if(! $this->activated('templates_manager')) return;
 
         $this->settings = new SettingsApi();
 

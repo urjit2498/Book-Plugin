@@ -22,12 +22,7 @@ class TestimonialController extends BaseController
     public function register()
     {
         
-        $option = get_option('book_plugin');
-        $activated = isset( $option['testimonial_manager'] ) ? $option['testimonial_manager'] : false;
-
-        if(! $activated){
-            return;
-        }
+        if(! $this->activated('testimonial_manager')) return;
 
         $this->settings = new SettingsApi();
 

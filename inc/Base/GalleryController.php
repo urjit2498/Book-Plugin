@@ -22,12 +22,7 @@ class GalleryController extends BaseController
     public function register()
     {
         
-        $option = get_option('book_plugin');
-        $activated = isset( $option['gallery_manager'] ) ? $option['gallery_manager'] : false;
-
-        if(! $activated){
-            return;
-        }
+        if(! $this->activated('gallery_manager')) return;
 
         $this->settings = new SettingsApi();
 
