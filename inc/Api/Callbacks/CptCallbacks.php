@@ -13,7 +13,17 @@ class CptCallbacks
 
     public function cptSanitize($input)
     {
-        return $input;
+        $output = get_option('book_plugin_cpt');
+        
+        foreach ($output as $key => $value) {
+            if($input['post_type']===$key){
+                $output[$key] = $input;
+            }else{
+                $output[$input['post_type']] = $input;
+            }
+        }
+
+        return $output;
     }
 
     public function textField( $args )
@@ -32,7 +42,7 @@ class CptCallbacks
         $option_name = $args['option_name'];
         $checkbox = get_option($option_name);
 
-        $checked = isset( $checkbox[$name] ) ? ( $checkbox[$name] ? true : false ) : false;
-        echo '<input type="checkbox" id="'.$name.'" name="' .$option_name.'['. $name . ']" value="1" class="' . $classes . '" ' . ( $checked ? 'checked' : '') . '>';
+        
+        echo '<input type="checkbox" id="'.$name.'" name="' .$option_name.'['. $name . ']" value="1" class="">';
     }
 }
