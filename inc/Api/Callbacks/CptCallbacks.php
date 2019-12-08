@@ -65,6 +65,7 @@ class CptCallbacks
             $checkbox = get_option($option_name);
             $checked = isset( $checkbox[$_POST["edit_post"]][$name] ) ?: false;
         }
-        echo '<input type="checkbox" id="'.$name.'" name="' .$option_name.'['. $name . ']" value="1" class="" ' . ( $checked ? 'checked' : '') . '>';
+        
+        echo '<div class="' . $classes . '"><input type="checkbox" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="1" class="" ' . ( $checked ? 'checked' : '') . '><label for="' . $name . '"><div></div></label></div>';
     }
 }

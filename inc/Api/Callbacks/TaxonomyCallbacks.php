@@ -66,7 +66,8 @@ class TaxonomyCallbacks
             $checkbox = get_option($option_name);
             $checked = isset( $checkbox[$_POST["edit_taxonomy"]][$name] ) ?: false;
         }
-        echo '<input type="checkbox" id="'.$name.'" name="' .$option_name.'['. $name . ']" value="1" class="" ' . ( $checked ? 'checked' : '') . '>';
+        
+        echo '<div class="' . $classes . '"><input type="checkbox" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="1" class="" ' . ( $checked ? 'checked' : '') . '><label for="' . $name . '"><div></div></label></div>';
     }
 
     public function checkboxPostTypesField($args)
@@ -92,8 +93,7 @@ class TaxonomyCallbacks
 
             $output .= '<div class="'.$classes.'" style="margin-bottom: 10px;"><input type="checkbox" id="'.$post.'" name="' .$option_name.'['. $name.']['.$post.']" value="1" class="" ' . ( $checked ? 'checked' : '') . '><label for="'.$post.'"><div></div></label>   <strong>'.$post.'</strong></div>';
         }
-        // echo '<input type="checkbox" id="'.$name.'" name="' .$option_name.'['. $name . ']" value="1" class="" ' . ( $checked ? 'checked' : '') . '>';
-
+        
         echo $output;
     }
     
