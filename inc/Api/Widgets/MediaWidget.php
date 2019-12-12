@@ -52,6 +52,11 @@ class MediaWidget extends WP_Widget
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
 		}
+
+		if ( ! empty( $instance['image'] ) ) {
+			echo '<img url="'.esc_url($instance['image']).'" alt="Image Not Support">';
+		}
+
 		echo $args['after_widget'];
 	}
     
@@ -59,6 +64,7 @@ class MediaWidget extends WP_Widget
     // form()
     public function form( $instance ) {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( 'Custom Text', 'awps' );
+		$image = ! empty( $instance['image'] ) ? $instance['image'] : '';
 		?>
 <p>
     <label
@@ -67,12 +73,21 @@ class MediaWidget extends WP_Widget
         name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text"
         value="<?php echo esc_attr( $title ); ?>">
 </p>
+<p>
+    <label
+        for="<?php echo esc_attr( $this->get_field_id( 'image' ) ); ?>"><?php esc_attr_e( 'Image:', 'awps' ); ?></label>
+    <input class="widefat image-upload" style="margin-top: 10px;"
+        id="<?php echo esc_attr( $this->get_field_id( 'image' ) ); ?>"
+        name="<?php echo esc_attr( $this->get_field_name( 'image' ) ); ?>" type="text"
+        value="<?php echo esc_url( $image ); ?>">
+    <button type="button" class="button button-primary js-image-upload">Select Image</button>
+</p>
 <?php 
 	}
-    //update()
-    public function update( $new_instance, $old_instance ) {
+	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['image'] = ! empty( $new_instance['image'] ) ? $new_instance['image'] : '';
 		return $instance;
 	}
     
