@@ -6,24 +6,100 @@ namespace Inc\Base;
 use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
 use Inc\Api\Callbacks\AdminCallbacks;
+use Inc\Api\Callbacks\TestimonialCallbacks;
 /**
 * 
 */
 class TestimonialController extends BaseController
 {
+	public $settings;
 	public $callbacks;
-	public $subpages = array();
+
+	// public $subpages = array();
 	public function register()
 	{
 		if ( ! $this->activated( 'testimonial_manager' ) ) return;
 
+		$this->settings = new SettingsApi();
+		$this->callbacks = new TestimonialCallbacks();
+		
 		add_action( 'init', array( $this, 'testimonial_cpt' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_meta_box' ) );
 		add_action( 'manage_testimonial_posts_columns', array( $this, 'set_custom_columns' ) );
 		add_action( 'manage_testimonial_posts_custom_column', array( $this, 'set_custom_columns_data' ), 10, 2 );
 		add_filter( 'manage_edit-testimonial_sortable_columns', array( $this, 'set_custom_columns_sortable' ) );
+
+		$this->setShortcodePage();
+
+		add_shortcode( 'testimonial-form', array( $this, 'testimonial_form' ) );
+		add_action( 'wp_ajax_submit_testmionial', array( $this, 'submit_testmionial' ) );
+		add_action( 'wp_ajax_nopriv_submit_testmionial', array( $this, 'submit_testmionial' ) );
 	}
+
+	public function submit_testmionial()
+	{
+		$name = sanitize_text_field($_POST['name']);
+		$email = sanitize_email($_POST['email']);
+		$message = sanitize_textarea_field($_POST['message']);
+		$data = array(
+			'name' => $name,
+			'email' => $email,
+			'approved' => 0,
+			'featured' => 0
+		);
+		$args = array(
+			'post_title' => 'Testimonial from '.$name,
+			'post_content' => $message,
+			'post_author' => 1,
+			'post_status' => 'publish',
+			'post_type' => 'testimonial',
+			'meta_input' => array(
+				'_book_testimonial_key' => $data
+			)
+		);
+		$postID = wp_insert_post($args);
+		if ($postID) {
+			$return = array(
+				'status' => 'success',
+				'ID' => $postID
+			);
+			wp_send_json($return);
+			wp_die();
+		}
+		$return = array(
+			'status' => 'error'
+		);
+		wp_send_json($return);
+		wp_die();
+	}
+
+	public function testimonial_form()
+	{
+		ob_start();
+		echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/form.css\" type=\"text/css\" media=\"all\" />";
+		require_once( "$this->plugin_path/templates/contact-form.php" );
+		echo "<script src=\"$this->plugin_url/assets/form.js\"></script>";
+		return ob_get_clean();
+	}
+
+	public function setShortcodePage()
+	{
+		$subpage = array(
+			array(
+				'parent_slug' => 'edit.php?post_type=testimonial',
+				'page_title' => 'Shortcodes',
+				'menu_title' => 'Shortcodes',
+				'capability' => 'manage_options',
+				'menu_slug' => 'book_testimonial_shortcode',
+				'callback' => array( $this->callbacks, 'shortcodePage' )
+			)
+		);
+
+		$this->settings->addSubPages( $subpage )->register();
+
+	}
+
 	public function testimonial_cpt ()
 	{
 		$labels = array(
@@ -41,6 +117,7 @@ class TestimonialController extends BaseController
 		);
 		register_post_type ( 'testimonial', $args );
 	}
+
 	public function add_meta_boxes()
 	{
 		add_meta_box(
@@ -52,6 +129,7 @@ class TestimonialController extends BaseController
 			'default'
 		);
 	}
+	
 	public function render_features_box($post)
 	{
 		wp_nonce_field( 'book_testimonial', 'book_testimonial_nonce' );
@@ -95,6 +173,7 @@ class TestimonialController extends BaseController
 </div>
 <?php
 	}
+	
 	public function save_meta_box($post_id)
 	{
 		if (! isset($_POST['book_testimonial_nonce'])) {
@@ -112,7 +191,7 @@ class TestimonialController extends BaseController
 		}
 		$data = array(
 			'name' => sanitize_text_field( $_POST['book_testimonial_author'] ),
-			'email' => sanitize_text_field( $_POST['book_testimonial_email'] ),
+			'email' => sanitize_email( $_POST['book_testimonial_email'] ),
 			'approved' => isset($_POST['book_testimonial_approved']) ? 1 : 0,
 			'featured' => isset($_POST['book_testimonial_featured']) ? 1 : 0,
 		);

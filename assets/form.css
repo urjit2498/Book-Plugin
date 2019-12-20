@@ -1,0 +1,28 @@
+#book-testimonial-form,
+.field-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.field-msg {
+    display: none;
+    position: absolute;
+    left: 2px;
+    bottom: -14px;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.show {
+    display: block;
+}
+
+.error {
+    color: rgb(200, 20, 20);
+}
+
+.success {
+    color: rgb(8, 98, 8);
+}
