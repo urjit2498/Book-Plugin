@@ -26,5 +26,7 @@
     </div>
 
     <input type="hidden" name="action" value="submit_testmionial">
+    <input type="hidden" name="nonce" value="<?php echo wp_create_nonce("testimonial-nonce") ?>">
+
 
 </form>
